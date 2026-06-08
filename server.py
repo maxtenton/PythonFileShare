@@ -48,13 +48,14 @@ def send_length(conn, length: int):
 def SendFiles(TARGET_IP=CLibs.NetTools.getLocalIP()):
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    bRunning = True
 
     try:
         server_sock.bind((TARGET_IP, PORT))
         server_sock.listen(5)
         print(f"Server listening on {TARGET_IP}:{PORT}")
 
-        while True:
+        while bRunning:
             conn, clt_address = server_sock.accept()
             print(f"Received connection from {clt_address}")
 
@@ -109,7 +110,8 @@ def SendFiles(TARGET_IP=CLibs.NetTools.getLocalIP()):
                 print(f"Error handling client: {e}")
             finally:
                 conn.close()
-                print("Connection closed. Waiting for next client...")
+                print("Connection closed. Exiting...")
+                bRunning = False
 
     except Exception as e:
         print(f"Server error: {e}")
