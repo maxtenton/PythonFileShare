@@ -8,7 +8,7 @@ load_dotenv()
 PORT = 80
 
 
-def send_all(sock, data: bytes):
+def send_all(sock : socket.socket, data: bytes):
     """Send exactly len(data) bytes."""
     total = 0
     while total < len(data):
@@ -18,7 +18,7 @@ def send_all(sock, data: bytes):
         total += sent
 
 
-def recv_exact(sock, length: int) -> bytes:
+def recv_exact(sock : socket.socket, length: int) -> bytes:
     """Receive exactly `length` bytes."""
     buf = b''
     while len(buf) < length:
@@ -29,7 +29,7 @@ def recv_exact(sock, length: int) -> bytes:
     return buf
 
 
-def recv_line(sock) -> str:
+def recv_line(sock : socket.socket) -> str:
     """Receive a newline-terminated length header."""
     buf = b''
     while True:
@@ -41,12 +41,12 @@ def recv_line(sock) -> str:
         buf += byte
 
 
-def send_length(sock, length: int):
+def send_length(sock : socket.socket, length: int):
     """Send an integer length as a newline-terminated string."""
     send_all(sock, f"{length}\n".encode('utf-8'))
 
 
-def start(TARGET="127.0.0.1"):
+def start(TARGET : str ="127.0.0.1"):
     client_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     try:
@@ -62,7 +62,7 @@ def start(TARGET="127.0.0.1"):
         file_amnt = int(recv_line(client_sock))
         send_all(client_sock, b'ACK')
 
-        server_files = []
+        server_files : = []
         for _ in range(file_amnt):
             name_len = int(recv_line(client_sock))
             send_all(client_sock, b'Ready')
