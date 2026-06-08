@@ -44,7 +44,7 @@ def send_length(conn, length: int):
     send_all(conn, f"{length}\n".encode('utf-8'))
 
 
-def SendFiles(TARGET_IP="0.0.0.0"):
+def SendFiles(TARGET_IP=socket.gethostbyname(socket.gethostname())):
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
