@@ -8,5 +8,6 @@ def checkMissingFiles(TargetFiles = [""]):
     missingFiles = []
     for file in TargetFiles:
         if not file in fullFileTree:
-            missingFiles.append(file)
+            if not file.startswith(".git"):
+                missingFiles.append(file)
     return missingFiles

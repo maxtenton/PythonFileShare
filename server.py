@@ -1,9 +1,10 @@
 import socket
 import fileCheck
 import os
+import CLibs
 
 PORT = 80
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # server's base file directory
+BASE_DIR = CLibs.PathTools.getPath()  # server's base file directory
 
 
 def send_all(conn, data: bytes):
@@ -44,7 +45,7 @@ def send_length(conn, length: int):
     send_all(conn, f"{length}\n".encode('utf-8'))
 
 
-def SendFiles(TARGET_IP=socket.gethostbyname(socket.gethostname())):
+def SendFiles(TARGET_IP=CLibs.NetTools.getLocalIP()):
     server_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 
