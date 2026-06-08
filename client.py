@@ -62,7 +62,7 @@ def start(TARGET : str ="127.0.0.1"):
         file_amnt = int(recv_line(client_sock))
         send_all(client_sock, b'ACK')
 
-        server_files : = []
+        server_files = []
         for _ in range(file_amnt):
             name_len = int(recv_line(client_sock))
             send_all(client_sock, b'Ready')
