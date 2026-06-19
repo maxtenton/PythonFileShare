@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-PORT = 80
+PORT = 8080
 
 
 def send_all(sock : socket.socket, data: bytes):

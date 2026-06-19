@@ -7,7 +7,7 @@ global fileTree
 fileTree = []
 class PathTools:
     def getPath():
-        return os.path.join("C:\\Users",os.getlogin(),folderInUser)
+        return os.path.join("C:\\TMP", folderInUser)
 
     def removeUserFromPath(path):
         p = pathlib.Path(path)

@@ -3,7 +3,7 @@ import fileCheck
 import os
 import CLibs
 
-PORT = 80
+PORT = 8080
 BASE_DIR = CLibs.PathTools.getPath()  # server's base file directory
 
 
